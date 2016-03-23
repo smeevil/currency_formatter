@@ -25,8 +25,8 @@ defmodule CurrencyFormatter.Mixfile do
   end
   defp package do
     [
-      maintainers: "Gerard de Brieder",
-      licenses: "WTFPL",
+      maintainers: ["Gerard de Brieder"],
+      licenses: ["WTFPL"],
       files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
       links: %{
         "GitHub" => "https://github.com/smeevil/currency_formatter",
