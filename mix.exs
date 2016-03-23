@@ -5,7 +5,7 @@ defmodule CurrencyFormatter.Mixfile do
     [app: :currency_formatter,
      version: "0.0.1",
      description: "A function to format a number to a currency using iso standards",
-     package: package
+     package: package,
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -27,7 +27,7 @@ defmodule CurrencyFormatter.Mixfile do
     [
       maintainers: "Gerard de Brieder",
       licenses: "WTFPL",
-      files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"]
+      files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
       links: %{
         "GitHub" => "https://github.com/smeevil/currency_formatter",
         "Docs"   => "http://smeevil.github.io/currency_formatter/"
