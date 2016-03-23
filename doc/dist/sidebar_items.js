@@ -1,0 +1,1 @@
+sidebarNodes={"exceptions":[],"extras":[{"id":"api-reference","title":"API Reference","headers":[]}],"modules":[{"id":"CurrencyFormatter","title":"CurrencyFormatter","functions":[{"id":"format/2","anchor":"format/2"}]}],"protocols":[]}
