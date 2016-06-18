@@ -59,4 +59,10 @@ defmodule CurrencyFormatterTest do
   test "should use a currency symbol when given" do
     assert "$1,234,567.89" = CurrencyFormatter.format(123456789, :USD)
   end
+
+  test "should return a map with formatting instructions do" do
+    assert %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;", "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2, "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100, "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."} == CurrencyFormatter.instructions(:eur)
+    assert %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;", "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2, "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100, "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."} == CurrencyFormatter.instructions("EUR")
+  end
+
 end

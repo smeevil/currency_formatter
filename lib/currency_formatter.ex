@@ -1,6 +1,7 @@
 defmodule CurrencyFormatter do
   @moduledoc """
-  This module takes care of formatting a number to a currency
+  This module takes care of formatting a number to a currency.
+  You can also request a map containing all the formatting settings for a currency.
   """
 
   @currencies "./lib/currency_iso.json" |> File.read! |> Poison.decode!
@@ -30,7 +31,7 @@ defmodule CurrencyFormatter do
     number |> to_string |> format(currency)
   end
   def format(number_string, currency) when is_binary(number_string) and is_binary(currency) do
-    format = Map.get(@currencies, String.downcase(currency))
+    format = instructions(currency)
 
     number_string
     |> remove_non_numbers
@@ -39,6 +40,27 @@ defmodule CurrencyFormatter do
     |> split_units_and_subunits
     |> handle_cents(format)
     |> set_symbol(format)
+  end
+
+ @doc """
+  Returns a map with formatting settings for a currency
+
+  ## examples
+
+    iex> CurrencyFormatter.instructions(:EUR)
+    %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;", "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2, "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100, "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."}
+
+  """
+  @spec format(Atom.t) :: Map.t
+  def instructions(currency \\ :USD)
+  def instructions(currency) when is_atom(currency) do
+   currency
+   |> Atom.to_string
+   |> instructions
+  end
+
+  def instructions(currency) when is_binary(currency) do
+    Map.get(@currencies, String.downcase(currency))
   end
 
   defp remove_non_numbers(string) do
