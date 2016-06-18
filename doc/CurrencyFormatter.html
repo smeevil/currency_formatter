@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>CurrencyFormatter – currency_formatter v0.0.1</title>
+    <title>CurrencyFormatter – currency_formatter v0.2.0</title>
     <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         currency_formatter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.1
+        v0.2.0
       </h2>
     </div>
     
@@ -59,7 +59,7 @@
 
 
       <h1>
-        <small class="visible-xs">currency_formatter v0.0.1</small>
+        <small class="visible-xs">currency_formatter v0.2.0</small>
         CurrencyFormatter
         
         
@@ -67,7 +67,8 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>This module takes care of formatting a number to a currency</p>
+          <p>This module takes care of formatting a number to a currency.
+You can also request a map containing all the formatting settings for a currency.</p>
 
         </section>
       
@@ -93,6 +94,15 @@
   </div>
   
     <div class="summary-synopsis"><p>Formats a number to currency</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#instructions/1">instructions(currency \\ :USD)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a map with formatting settings for a currency</p>
 </div>
   
 </div>
@@ -144,6 +154,23 @@
   “€6.543,21”</p>
 <p>  iex&gt; CurrencyFormatter.format(654321, “AUD”)
   “A$6,543.21”</p>
+
+  </section>
+</div>
+<div class="detail" id="instructions/1">
+  <div class="detail-header">
+    <a href="#instructions/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">instructions(currency \\ :USD)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a map with formatting settings for a currency</p>
+<h2>examples</h2>
+<p>  iex&gt; CurrencyFormatter.instructions(:EUR)
+  %{“alternate_symbols” =&gt; [], “decimal_mark” =&gt; “,”, “html_entity” =&gt; “&#x20AC;”, “iso_code” =&gt; “EUR”, “iso_numeric” =&gt; “978”, “name” =&gt; “Euro”, “priority” =&gt; 2, “smallest_denomination” =&gt; 1, “subunit” =&gt; “Cent”, “subunit_to_unit” =&gt; 100, “symbol” =&gt; “€”, “symbol_first” =&gt; true, “thousands_separator” =&gt; “.”}</p>
 
   </section>
 </div>
