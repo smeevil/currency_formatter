@@ -65,4 +65,8 @@ defmodule CurrencyFormatterTest do
     assert %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;", "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2, "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100, "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."} == CurrencyFormatter.instructions("EUR")
   end
 
+  test "should return the complete currencies list" do
+     assert %{"usd" => %{}, "eur" => %{}} = CurrencyFormatter.get_currencies()
+  end
+
 end

@@ -63,6 +63,10 @@ defmodule CurrencyFormatter do
     Map.get(@currencies, String.downcase(currency))
   end
 
+  def get_currencies do
+    @currencies
+  end
+
   defp remove_non_numbers(string) do
     string |> String.replace(~r/[^0-9-]/, "")
   end
