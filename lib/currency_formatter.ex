@@ -63,6 +63,24 @@ defmodule CurrencyFormatter do
     Map.get(@currencies, String.downcase(currency))
   end
 
+  @doc """
+  Returns a map containing the full list of currencies
+
+  ## examples
+
+      iex> currencies = CurrencyFormatter.get_currencies()
+      iex> Enum.count(currencies)
+      165
+      iex> currencies["usd"]
+      %{"alternate_symbols" => ["US$"], "decimal_mark" => ".", "html_entity" => "$",
+        "iso_code" => "USD", "iso_numeric" => "840", "name" => "United States Dollar",
+        "priority" => 1, "smallest_denomination" => 1, "subunit" => "Cent",
+        "subunit_to_unit" => 100, "symbol" => "$", "symbol_first" => true,
+        "thousands_separator" => ","}
+
+  """
+
+  @spec get_currencies() :: Map.t
   def get_currencies do
     @currencies
   end
