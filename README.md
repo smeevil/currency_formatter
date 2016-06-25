@@ -6,6 +6,7 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
 
 ## Examples :
 
+Formatting cents to currency string
 ```elixir
     iex> CurrencyFormatter.format(123456)
     "$1,234.56"
@@ -17,6 +18,8 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
     "A$6,543.21"
 ```
 
+Requesting formatting instructions for a currency
+
 ```elixir
   iex> CurrencyFormatter.instructions(:EUR)
   %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;",
@@ -26,6 +29,7 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
 
 ```
 
+Get a map of all currencies and their instructions
 ```elixir
   iex> currencies = CurrencyFormatter.get_currencies()
   iex> Enum.count(currencies)
@@ -36,6 +40,27 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
     "priority" => 1, "smallest_denomination" => 1, "subunit" => "Cent",
     "subunit_to_unit" => 100, "symbol" => "$", "symbol_first" => true,
     "thousands_separator" => ","}
+```
+
+Getting a list of tuples for use with a select dropdown
+```elixir
+  iex> CurrencyFormatter.get_currencies_for_select()
+  ["AED", "AFN", "ALL",...]
+```
+      
+```elixir
+      iex> CurrencyFormatter.get_currencies_for_select(:names)
+      [{"AED", "United Arab Emirates Dirham"}, {"AFN", "Afghan Afghani"} , {"ALL", "Albanian Lek"}, ...]
+
+```
+```elixir
+      iex> CurrencyFormatter.get_currencies_for_select(:symbols)
+      [{"AUD", "$"}, {"CAD", "$"}, {"USD", "$"},...]
+
+```
+```elixir
+      iex> CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
+      [{"AUD", "A$"}, {"CAD", "C$"}, {"USD", "$"}, ...]
 ```
 ## Installation
 
@@ -51,5 +76,5 @@ end
 
 ## Documentation
 
-API documentation is available at [https://hexdocs.pm/currency_formatter](https://hexdocs.pm/currency_formatter)
+API documentation is available at [https://hexdocs.pm/currency_formatter](https://hexdocs.pm/currency_formatter) and [http://smeevil.github.io/currency_formatter](http://smeevil.github.io/currency_formatter) 
 
