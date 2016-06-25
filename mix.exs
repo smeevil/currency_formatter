@@ -3,7 +3,7 @@ defmodule CurrencyFormatter.Mixfile do
 
   def project do
     [app: :currency_formatter,
-     version: "0.2.0",
+     version: "0.3.0",
      description: "A function to format a number to a currency using iso standards",
      package: package,
      elixir: "~> 1.3",

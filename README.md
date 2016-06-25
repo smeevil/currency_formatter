@@ -17,6 +17,26 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
     "A$6,543.21"
 ```
 
+```elixir
+  iex> CurrencyFormatter.instructions(:EUR)
+  %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;",
+  "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2,
+  "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100,
+  "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."}
+
+```
+
+```elixir
+  iex> currencies = CurrencyFormatter.get_currencies()
+  iex> Enum.count(currencies)
+  165
+  iex> currencies["usd"]
+  %{"alternate_symbols" => ["US$"], "decimal_mark" => ".", "html_entity" => "$",
+    "iso_code" => "USD", "iso_numeric" => "840", "name" => "United States Dollar",
+    "priority" => 1, "smallest_denomination" => 1, "subunit" => "Cent",
+    "subunit_to_unit" => 100, "symbol" => "$", "symbol_first" => true,
+    "thousands_separator" => ","}
+```
 ## Installation
 
 As this is [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
