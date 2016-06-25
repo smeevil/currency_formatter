@@ -11,15 +11,14 @@ defmodule CurrencyFormatter do
 
   ## examples
 
-    iex> CurrencyFormatter.format(123456)
-    "$1,234.56"
+      iex> CurrencyFormatter.format(123456)
+      "$1,234.56"
 
-    iex> CurrencyFormatter.format(654321, :eur)
-    "€6.543,21"
+      iex> CurrencyFormatter.format(654321, :eur)
+      "€6.543,21"
 
-
-    iex> CurrencyFormatter.format(654321, "AUD")
-    "A$6,543.21"
+      iex> CurrencyFormatter.format(654321, "AUD")
+      "A$6,543.21"
 
   """
   @spec format(Integer.t, Atom.t) :: String.t
@@ -47,11 +46,14 @@ defmodule CurrencyFormatter do
 
   ## examples
 
-    iex> CurrencyFormatter.instructions(:EUR)
-    %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;", "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2, "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100, "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."}
+      iex> CurrencyFormatter.instructions(:EUR)
+      %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;",
+      "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2,
+      "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100,
+      "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."}
 
   """
-  @spec format(Atom.t) :: Map.t
+  @spec instructions(Atom.t) :: Map.t
   def instructions(currency \\ :USD)
   def instructions(currency) when is_atom(currency) do
    currency
@@ -59,6 +61,7 @@ defmodule CurrencyFormatter do
    |> instructions
   end
 
+  @spec instructions(String.t) :: Map.t
   def instructions(currency) when is_binary(currency) do
     Map.get(@currencies, String.downcase(currency))
   end
@@ -79,7 +82,6 @@ defmodule CurrencyFormatter do
         "thousands_separator" => ","}
 
   """
-
   @spec get_currencies() :: Map.t
   def get_currencies do
     @currencies
