@@ -87,6 +87,56 @@ defmodule CurrencyFormatter do
     @currencies
   end
 
+  @doc """
+  Returns a List with tuples that can be used as options for select
+
+  ## Examples
+      CurrencyFormatter.get_currencies_for_select()
+      ["AED", "AFN", "ALL",...]
+
+  """
+  @spec get_currencies_for_select() :: [{String.t, String.t}]
+  def get_currencies_for_select do
+    get_currencies
+    |> Enum.map( fn({_, c}) -> c["iso_code"] end)
+    |> Enum.sort
+  end
+
+  @doc """
+  Returns a List with tuples that can be used as options for select
+
+  ## Examples
+      CurrencyFormatter.get_currencies_for_select(:names)
+      [{"AED", "United Arab Emirates Dirham"}, {"AFN", "Afghan Afghani"} , {"ALL", "Albanian Lek"}, ...]
+
+      CurrencyFormatter.get_currencies_for_select(:symbols)
+      [{"AUD", "$"}, {"CAD", "$"}, {"USD", "$"},...]
+
+      CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
+      [{"AUD", "A$"}, {"CAD", "C$"}, {"USD", "$"}, ...]
+  """
+  @spec get_currencies_for_select(Atom.t) :: [{String.t, String.t}]
+  def get_currencies_for_select(:names) do
+    get_currencies
+    |> map_names
+    |> Enum.sort
+  end
+  def get_currencies_for_select(:symbols) do
+    get_currencies
+    |> map_symbols
+    |> Enum.sort
+  end
+  def get_currencies_for_select(:disambiguate_symbols) do
+    get_currencies
+    |> map_disambiguate_symbols
+    |> Enum.sort
+  end
+  def get_currencies_for_select(format), do: raise "#{inspect format} is not supported, please use either :names, :symbols or :disambiguate_symbols"
+
+  defp map_names(map), do: Enum.map(map, fn({_, c}) -> {c["iso_code"], c["name"]} end)
+  defp map_symbols(map), do: Enum.map(map, fn({_, c}) -> {c["iso_code"], c["symbol"]} end)
+  defp map_disambiguate_symbols(map), do: Enum.map(map, fn({_, c}) -> {c["iso_code"], c["disambiguate_symbol"] || c["symbol"]}end)
+
   defp remove_non_numbers(string) do
     string |> String.replace(~r/[^0-9-]/, "")
   end

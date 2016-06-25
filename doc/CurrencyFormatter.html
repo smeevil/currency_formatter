@@ -8,8 +8,6 @@
     <title>CurrencyFormatter – currency_formatter v0.3.0</title>
     <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
-      <link rel="canonical" href="https://hexdocs.pm/currency_formatter/CurrencyFormatter.html" />
-    
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -109,6 +107,24 @@ You can also request a map containing all the formatting settings for a currency
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#get_currencies_for_select/0">get_currencies_for_select()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a List with tuples that can be used as options for select</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_currencies_for_select/1">get_currencies_for_select(format)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a List with tuples that can be used as options for select</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#instructions/1">instructions(currency \\ :USD)</a>
   </div>
   
@@ -201,6 +217,66 @@ iex&gt; currencies[&quot;usd&quot;]
   &quot;priority&quot; =&gt; 1, &quot;smallest_denomination&quot; =&gt; 1, &quot;subunit&quot; =&gt; &quot;Cent&quot;,
   &quot;subunit_to_unit&quot; =&gt; 100, &quot;symbol&quot; =&gt; &quot;$&quot;, &quot;symbol_first&quot; =&gt; true,
   &quot;thousands_separator&quot; =&gt; &quot;,&quot;}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_currencies_for_select/0">
+  <div class="detail-header">
+    <a href="#get_currencies_for_select/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">get_currencies_for_select()</span>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">get_currencies_for_select :: [{<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}]</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Returns a List with tuples that can be used as options for select</p>
+<h2>Examples</h2>
+<pre><code class="elixir">CurrencyFormatter.get_currencies_for_select()
+[&quot;AED&quot;, &quot;AFN&quot;, &quot;ALL&quot;,...]</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_currencies_for_select/1">
+  <div class="detail-header">
+    <a href="#get_currencies_for_select/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">get_currencies_for_select(format)</span>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">get_currencies_for_select(<a href="http://elixir-lang.org/docs/stable/elixir/Atom.html#t:t/0">Atom.t</a>) :: [{<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}]</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Returns a List with tuples that can be used as options for select</p>
+<h2>Examples</h2>
+<pre><code class="elixir">CurrencyFormatter.get_currencies_for_select(:names)
+[{&quot;AED&quot;, &quot;United Arab Emirates Dirham&quot;}, {&quot;AFN&quot;, &quot;Afghan Afghani&quot;} , {&quot;ALL&quot;, &quot;Albanian Lek&quot;}, ...]
+
+CurrencyFormatter.get_currencies_for_select(:symbols)
+[{&quot;AUD&quot;, &quot;$&quot;}, {&quot;CAD&quot;, &quot;$&quot;}, {&quot;USD&quot;, &quot;$&quot;},...]
+
+CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
+[{&quot;AUD&quot;, &quot;A$&quot;}, {&quot;CAD&quot;, &quot;C$&quot;}, {&quot;USD&quot;, &quot;$&quot;}, ...]</code></pre>
 
   </section>
 </div>

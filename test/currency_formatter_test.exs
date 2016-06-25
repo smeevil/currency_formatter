@@ -69,4 +69,28 @@ defmodule CurrencyFormatterTest do
      assert %{"usd" => %{}, "eur" => %{}} = CurrencyFormatter.get_currencies()
   end
 
+  test "should return a list usable for select dropdowns" do
+    assert  ["AED", "AFN", "ALL"] = CurrencyFormatter.get_currencies_for_select() |> Enum.take(3)
+  end
+
+  test "should return a list usable for select dropdowns using names" do
+    assert [
+      {"AED", "United Arab Emirates Dirham"},
+      {"AFN", "Afghan Afghani"} ,
+      {"ALL", "Albanian Lek"}
+    ]= CurrencyFormatter.get_currencies_for_select(:names) |> Enum.take(3)
+  end
+
+  test "should return a list usable for select dropdowns using currency symbols" do
+    assert {"AUD", "$"} = CurrencyFormatter.get_currencies_for_select(:symbols) |> Enum.find( fn({iso, _}) -> iso == "AUD" end)
+  end
+
+  test "should return a list usable for select dropdowns using disambiguate currency symbols" do
+    assert {"AUD", "A$"} = CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols) |> Enum.find( fn({iso, _}) -> iso == "AUD" end)
+  end
+
+  test "should raise an error" do
+    assert_raise RuntimeError, ":other is not supported, please use either :names, :symbols or :disambiguate_symbols", fn -> CurrencyFormatter.get_currencies_for_select(:other) end
+  end
 end
+
