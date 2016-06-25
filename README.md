@@ -29,4 +29,7 @@ def deps do
 end
 ```
 
+## Documentation
+
+API documentation is available at [https://hexdocs.pm/currency_formatter](https://hexdocs.pm/currency_formatter)
 
