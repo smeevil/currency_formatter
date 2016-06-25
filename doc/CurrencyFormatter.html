@@ -99,6 +99,15 @@ You can also request a map containing all the formatting settings for a currency
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#get_currencies/0">get_currencies()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a map containing the full list of currencies</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#instructions/1">instructions(currency \\ :USD)</a>
   </div>
   
@@ -148,12 +157,47 @@ You can also request a map containing all the formatting settings for a currency
   <section class="docstring">
     <p>Formats a number to currency</p>
 <h2>examples</h2>
-<p>  iex&gt; CurrencyFormatter.format(123456)
-  “$1,234.56”</p>
-<p>  iex&gt; CurrencyFormatter.format(654321, :eur)
-  “€6.543,21”</p>
-<p>  iex&gt; CurrencyFormatter.format(654321, “AUD”)
-  “A$6,543.21”</p>
+<pre><code class="iex elixir">iex&gt; CurrencyFormatter.format(123456)
+&quot;$1,234.56&quot;
+
+iex&gt; CurrencyFormatter.format(654321, :eur)
+&quot;€6.543,21&quot;
+
+iex&gt; CurrencyFormatter.format(654321, &quot;AUD&quot;)
+&quot;A$6,543.21&quot;</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_currencies/0">
+  <div class="detail-header">
+    <a href="#get_currencies/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">get_currencies()</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">get_currencies :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Returns a map containing the full list of currencies</p>
+<h2>examples</h2>
+<pre><code class="iex elixir">iex&gt; currencies = CurrencyFormatter.get_currencies()
+iex&gt; Enum.count(currencies)
+165
+iex&gt; currencies[&quot;usd&quot;]
+%{&quot;alternate_symbols&quot; =&gt; [&quot;US$&quot;], &quot;decimal_mark&quot; =&gt; &quot;.&quot;, &quot;html_entity&quot; =&gt; &quot;$&quot;,
+  &quot;iso_code&quot; =&gt; &quot;USD&quot;, &quot;iso_numeric&quot; =&gt; &quot;840&quot;, &quot;name&quot; =&gt; &quot;United States Dollar&quot;,
+  &quot;priority&quot; =&gt; 1, &quot;smallest_denomination&quot; =&gt; 1, &quot;subunit&quot; =&gt; &quot;Cent&quot;,
+  &quot;subunit_to_unit&quot; =&gt; 100, &quot;symbol&quot; =&gt; &quot;$&quot;, &quot;symbol_first&quot; =&gt; true,
+  &quot;thousands_separator&quot; =&gt; &quot;,&quot;}</code></pre>
 
   </section>
 </div>
@@ -166,11 +210,25 @@ You can also request a map containing all the formatting settings for a currency
       
   </div>
   
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">instructions(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+          <pre><code class="elixir">instructions(<a href="http://elixir-lang.org/docs/stable/elixir/Atom.html#t:t/0">Atom.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+        
+      </div>
+    </div>
+  
   <section class="docstring">
     <p>Returns a map with formatting settings for a currency</p>
 <h2>examples</h2>
-<p>  iex&gt; CurrencyFormatter.instructions(:EUR)
-  %{“alternate_symbols” =&gt; [], “decimal_mark” =&gt; “,”, “html_entity” =&gt; “&#x20AC;”, “iso_code” =&gt; “EUR”, “iso_numeric” =&gt; “978”, “name” =&gt; “Euro”, “priority” =&gt; 2, “smallest_denomination” =&gt; 1, “subunit” =&gt; “Cent”, “subunit_to_unit” =&gt; 100, “symbol” =&gt; “€”, “symbol_first” =&gt; true, “thousands_separator” =&gt; “.”}</p>
+<pre><code class="iex elixir">iex&gt; CurrencyFormatter.instructions(:EUR)
+%{&quot;alternate_symbols&quot; =&gt; [], &quot;decimal_mark&quot; =&gt; &quot;,&quot;, &quot;html_entity&quot; =&gt; &quot;&amp;#x20AC;&quot;,
+&quot;iso_code&quot; =&gt; &quot;EUR&quot;, &quot;iso_numeric&quot; =&gt; &quot;978&quot;, &quot;name&quot; =&gt; &quot;Euro&quot;, &quot;priority&quot; =&gt; 2,
+&quot;smallest_denomination&quot; =&gt; 1, &quot;subunit&quot; =&gt; &quot;Cent&quot;, &quot;subunit_to_unit&quot; =&gt; 100,
+&quot;symbol&quot; =&gt; &quot;€&quot;, &quot;symbol_first&quot; =&gt; true, &quot;thousands_separator&quot; =&gt; &quot;.&quot;}</code></pre>
 
   </section>
 </div>
