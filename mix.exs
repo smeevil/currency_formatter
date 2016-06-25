@@ -6,7 +6,7 @@ defmodule CurrencyFormatter.Mixfile do
      version: "0.2.0",
      description: "A function to format a number to a currency using iso standards",
      package: package,
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -18,9 +18,9 @@ defmodule CurrencyFormatter.Mixfile do
 
   defp deps do
     [
-        {:poison  , ">0.0.0"},
-        {:earmark , "~> 0.1"  , only: :dev},
-        {:ex_doc  , "~> 0.11" , only: :dev}
+        {:poison  , "~> 2.2.0"},
+        {:earmark , "~> 0.2.1"  , only: :dev},
+        {:ex_doc  , "~> 0.12.0" , only: :dev}
     ]
   end
   defp package do
