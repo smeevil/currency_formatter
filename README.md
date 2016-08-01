@@ -47,7 +47,7 @@ Getting a list of tuples for use with a select dropdown
   iex> CurrencyFormatter.get_currencies_for_select()
   ["AED", "AFN", "ALL",...]
 ```
-      
+
 ```elixir
       iex> CurrencyFormatter.get_currencies_for_select(:names)
       [{"AED", "United Arab Emirates Dirham"}, {"AFN", "Afghan Afghani"} , {"ALL", "Albanian Lek"}, ...]
@@ -61,6 +61,12 @@ Getting a list of tuples for use with a select dropdown
 ```elixir
       iex> CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
       [{"AUD", "A$"}, {"CAD", "C$"}, {"USD", "$"}, ...]
+```
+
+Get the disambiguous symbol of a currrency
+```elixir
+      iex> CurrencyFormatter.symbol(:AUD)
+      "A$"
 ```
 ## Installation
 
@@ -76,5 +82,5 @@ end
 
 ## Documentation
 
-API documentation is available at [https://hexdocs.pm/currency_formatter](https://hexdocs.pm/currency_formatter) and [http://smeevil.github.io/currency_formatter](http://smeevil.github.io/currency_formatter) 
+API documentation is available at [https://hexdocs.pm/currency_formatter](https://hexdocs.pm/currency_formatter) and [http://smeevil.github.io/currency_formatter](http://smeevil.github.io/currency_formatter)
 

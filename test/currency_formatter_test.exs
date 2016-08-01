@@ -81,6 +81,10 @@ defmodule CurrencyFormatterTest do
     ]= CurrencyFormatter.get_currencies_for_select(:names) |> Enum.take(3)
   end
 
+  test "symbol" do
+    assert "A$" = CurrencyFormatter.symbol(:AUD)
+  end
+
   test "should return a list usable for select dropdowns using currency symbols" do
     assert {"AUD", "$"} = CurrencyFormatter.get_currencies_for_select(:symbols) |> Enum.find( fn({iso, _}) -> iso == "AUD" end)
   end

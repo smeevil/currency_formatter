@@ -133,6 +133,17 @@ defmodule CurrencyFormatter do
   end
   def get_currencies_for_select(format), do: raise "#{inspect format} is not supported, please use either :names, :symbols or :disambiguate_symbols"
 
+  @doc"""
+  Returns the disambiguous symbol of a currency
+
+  ## Example
+
+      iex> CurrencyFormatter.symbol(:AUD)
+      "A$"
+
+  """
+  def symbol(currency), do: currency |> CurrencyFormatter.instructions |> get_symbol
+
   defp map_names(map), do: Enum.map(map, fn({_, c}) -> {c["iso_code"], c["name"]} end)
   defp map_symbols(map), do: Enum.map(map, fn({_, c}) -> {c["iso_code"], c["symbol"]} end)
   defp map_disambiguate_symbols(map), do: Enum.map(map, fn({_, c}) -> {c["iso_code"], c["disambiguate_symbol"] || c["symbol"]}end)
