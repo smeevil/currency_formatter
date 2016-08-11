@@ -2,14 +2,18 @@ defmodule CurrencyFormatter.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :currency_formatter,
-     version: "0.4.1",
-     description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
-     package: package,
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :currency_formatter,
+      version: "0.4.2",
+      description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
+      package: package,
+      elixir: "~> 1.3",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps,
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
+      test_coverage: [tool: ExCoveralls]
+     ]
   end
 
   def application do
@@ -19,8 +23,9 @@ defmodule CurrencyFormatter.Mixfile do
   defp deps do
     [
         {:poison  , "~> 2.2.0"},
-        {:earmark , ">0.0.0"  , only: :dev},
-        {:ex_doc  , "~>0.12.0" , only: :dev}
+        {:earmark , "~>1.0.1"  , only: :dev},
+        {:ex_doc  , "~>0.13.0" , only: :dev},
+        {:excoveralls, "~> 0.5.5", only: :test},
     ]
   end
   defp package do

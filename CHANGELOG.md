@@ -1,3 +1,6 @@
+## 0.4.2 (2016-08-11)
+  - bumped specs
+
 ## 0.4.1 (2016-08-01)
   - Added a new function CurrencyFormatter.symbol/1 which will return the disambiguous currency symbol
 
