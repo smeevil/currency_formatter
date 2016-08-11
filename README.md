@@ -1,4 +1,5 @@
 # CurrencyFormatter
+![](https://img.shields.io/hexpm/v/currency_formatter.svg) ![](https://img.shields.io/hexpm/dt/currency_formatter.svg) ![](https://img.shields.io/hexpm/dw/currency_formatter.svg) ![](https://img.shields.io/coveralls/smeevil/currency_formatter.svg) ![](https://img.shields.io/github/issues/smeevil/currency_formatter.svg) ![](https://img.shields.io/github/issues-pr/smeevil/currency_formatter.svg) ![](https://semaphoreci.com/api/v1/smeevil/currency_formatter/branches/master/shields_badge.svg)
 
 This package offers an Elixir function to format a number to a currency using ISO standards.
 
