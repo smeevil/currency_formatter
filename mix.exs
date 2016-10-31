@@ -22,10 +22,10 @@ defmodule CurrencyFormatter.Mixfile do
 
   defp deps do
     [
-        {:poison  , "~> 2.2.0"},
-        {:earmark , "~>1.0.1"  , only: :dev},
-        {:ex_doc  , "~>0.13.0" , only: :dev},
-        {:excoveralls, "~> 0.5.5", only: :test},
+        {:poison  , "~> 3.0.0"},
+        {:earmark , "~>1.0.2"  , only: :dev},
+        {:ex_doc  , "~>0.14.3" , only: :dev},
+        {:excoveralls, "~> 0.5.7", only: :test},
     ]
   end
   defp package do
