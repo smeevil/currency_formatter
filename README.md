@@ -9,65 +9,64 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
 
 Formatting cents to currency string
 ```elixir
-    iex> CurrencyFormatter.format(123456)
-    "$1,234.56"
+iex> CurrencyFormatter.format(123456)
+"US$1,234.56"
 
-    iex> CurrencyFormatter.format(654321, :eur)
-    "€6.543,21"
+iex> CurrencyFormatter.format(654321, :eur)
+"€6.543,21"
 
-    iex> CurrencyFormatter.format(654321, "AUD")
-    "A$6,543.21"
+iex> CurrencyFormatter.format(654321, "AUD")
+"A$6,543.21"
 ```
 
 Requesting formatting instructions for a currency
 
 ```elixir
-  iex> CurrencyFormatter.instructions(:EUR)
-  %{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;",
+iex> CurrencyFormatter.instructions(:EUR)
+%{"alternate_symbols" => [], "decimal_mark" => ",", "html_entity" => "&#x20AC;",
   "iso_code" => "EUR", "iso_numeric" => "978", "name" => "Euro", "priority" => 2,
   "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100,
   "symbol" => "€", "symbol_first" => true, "thousands_separator" => "."}
-
 ```
 
 Get a map of all currencies and their instructions
 ```elixir
-  iex> currencies = CurrencyFormatter.get_currencies()
-  iex> Enum.count(currencies)
-  165
-  iex> currencies["usd"]
-  %{"alternate_symbols" => ["US$"], "decimal_mark" => ".", "html_entity" => "$",
-    "iso_code" => "USD", "iso_numeric" => "840", "name" => "United States Dollar",
-    "priority" => 1, "smallest_denomination" => 1, "subunit" => "Cent",
-    "subunit_to_unit" => 100, "symbol" => "$", "symbol_first" => true,
-    "thousands_separator" => ","}
+iex> currencies = CurrencyFormatter.get_currencies()
+iex> Enum.count(currencies)
+172
+iex> currencies["usd"]
+%{"alternate_symbols" => ["US$"], "decimal_mark" => ".",
+  "disambiguate_symbol" => "US$", "html_entity" => "$", "iso_code" => "USD",
+  "iso_numeric" => "840", "name" => "United States Dollar", "priority" => 1,
+  "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100,
+  "symbol" => "$", "symbol_first" => true, "thousands_separator" => ","}
 ```
 
 Getting a list of tuples for use with a select dropdown
 ```elixir
-  iex> CurrencyFormatter.get_currencies_for_select()
-  ["AED", "AFN", "ALL",...]
+iex> CurrencyFormatter.get_currencies_for_select()
+["AED", "AFN", "ALL", ...]
 ```
 
 ```elixir
-      iex> CurrencyFormatter.get_currencies_for_select(:names)
-      [{"AED", "United Arab Emirates Dirham"}, {"AFN", "Afghan Afghani"} , {"ALL", "Albanian Lek"}, ...]
+iex> CurrencyFormatter.get_currencies_for_select(:names)
+[{"AED", "United Arab Emirates Dirham"}, {"AFN", "Afghan Afghani"} , {"ALL", "Albanian Lek"}, ...]
 
 ```
 ```elixir
-      iex> CurrencyFormatter.get_currencies_for_select(:symbols)
-      [{"AUD", "$"}, {"CAD", "$"}, {"USD", "$"},...]
+iex> CurrencyFormatter.get_currencies_for_select(:symbols)
+[{"AED", "د.إ"}, {"AFN", "؋"}, {"ALL", "L"}, ...]
 
 ```
 ```elixir
-      iex> CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
-      [{"AUD", "A$"}, {"CAD", "C$"}, {"USD", "$"}, ...]
+iex> CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
+[[{"AED", "د.إ"}, {"AFN", "؋"}, {"ALL", "Lek"}, ...]
 ```
 
 Get the disambiguous symbol of a currrency
 ```elixir
-      iex> CurrencyFormatter.symbol(:AUD)
-      "A$"
+iex> CurrencyFormatter.symbol(:AUD)
+"A$"
 ```
 ## Installation
 
@@ -77,7 +76,7 @@ As this is [available in Hex](https://hex.pm/docs/publish), the package can be i
 
 ```elixir
 def deps do
-  [{:currency_formatter, "~> 0.0.1"}]
+  [{:currency_formatter, "~> 0.4"}]
 end
 ```
 

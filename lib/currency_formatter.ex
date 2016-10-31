@@ -12,7 +12,7 @@ defmodule CurrencyFormatter do
   ## examples
 
       iex> CurrencyFormatter.format(123456)
-      "$1,234.56"
+      "US$1,234.56"
 
       iex> CurrencyFormatter.format(654321, :eur)
       "€6.543,21"
@@ -73,13 +73,13 @@ defmodule CurrencyFormatter do
 
       iex> currencies = CurrencyFormatter.get_currencies()
       iex> Enum.count(currencies)
-      165
+      172
       iex> currencies["usd"]
-      %{"alternate_symbols" => ["US$"], "decimal_mark" => ".", "html_entity" => "$",
-        "iso_code" => "USD", "iso_numeric" => "840", "name" => "United States Dollar",
-        "priority" => 1, "smallest_denomination" => 1, "subunit" => "Cent",
-        "subunit_to_unit" => 100, "symbol" => "$", "symbol_first" => true,
-        "thousands_separator" => ","}
+      %{"alternate_symbols" => ["US$"], "decimal_mark" => ".",
+      "disambiguate_symbol" => "US$", "html_entity" => "$", "iso_code" => "USD",
+      "iso_numeric" => "840", "name" => "United States Dollar", "priority" => 1,
+      "smallest_denomination" => 1, "subunit" => "Cent", "subunit_to_unit" => 100,
+      "symbol" => "$", "symbol_first" => true, "thousands_separator" => ","}
 
   """
   @spec get_currencies() :: Map.t
