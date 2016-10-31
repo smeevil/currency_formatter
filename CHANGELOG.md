@@ -1,3 +1,7 @@
+## 0.4.3 (2016-10-31)
+  - Updated data source, returning usd by default. Thank you @optikfluffel !
+  - bumped specs
+
 ## 0.4.2 (2016-08-11)
   - bumped specs
 
