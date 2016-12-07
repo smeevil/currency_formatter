@@ -1,3 +1,12 @@
+## 0.4.4 (2016-12-07)
+Added a configuration option so you can whitelist supported currencies. To make use of this you can update you app's config.exs with
+
+```elixir
+config :currency_formatter, :whitelist, ["EUR", "GBP", "USD"]
+```
+
+Thank you @vraravam for the suggestion :)
+
 ## 0.4.3 (2016-10-31)
   - Updated data source, returning usd by default. Thank you @optikfluffel !
   - bumped specs

@@ -84,7 +84,16 @@ defmodule CurrencyFormatter do
   """
   @spec get_currencies() :: Map.t
   def get_currencies do
-    @currencies
+    @currencies |> whitelist
+  end
+
+  defp whitelist(currencies) do
+    whitelist = Application.get_env(:currency_formatter, :whitelist)
+    if whitelist == nil do
+      currencies
+    else
+      Enum.filter(currencies, fn {_, %{"iso_code" => iso_code}} -> Enum.member?(whitelist, iso_code) end)
+    end
   end
 
   @doc """
@@ -193,4 +202,5 @@ defmodule CurrencyFormatter do
 
   defp get_symbol(%{"disambiguate_symbol" => symbol}), do: symbol
   defp get_symbol(config), do: config["symbol"]
+
 end

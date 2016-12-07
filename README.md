@@ -80,6 +80,13 @@ def deps do
 end
 ```
 
+## Setup
+By default you will have 172 currencies available, if you would like to limit the list you can configure a whitelist in your app's config.exs like :
+```elixir
+config :currency_formatter, :whitelist, ["EUR", "GBP", "USD"]
+```
+
+
 ## Documentation
 
 API documentation is available at [https://hexdocs.pm/currency_formatter](https://hexdocs.pm/currency_formatter) and [http://smeevil.github.io/currency_formatter](http://smeevil.github.io/currency_formatter)

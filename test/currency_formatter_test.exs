@@ -1,6 +1,16 @@
 defmodule CurrencyFormatterTest do
   use ExUnit.Case, async: false
+
   doctest CurrencyFormatter
+
+  setup do
+    previous = Application.get_env(:currency_formatter, :whitelist)
+    on_exit fn ->
+      Application.put_env(:currency_formatter, :whitelist,  previous)
+    end
+    :ok
+  end
+
   test "should correctly format in euro and dollars" do
     assert "€0,01" = CurrencyFormatter.format(1, :eur)
     assert "US$0.01" = CurrencyFormatter.format(1, "USD")
@@ -99,6 +109,11 @@ defmodule CurrencyFormatterTest do
 
   test "should raise an error" do
     assert_raise RuntimeError, ":other is not supported, please use either :names, :symbols or :disambiguate_symbols", fn -> CurrencyFormatter.get_currencies_for_select(:other) end
+  end
+
+  test "get_currencies_for_select should only return whitelisted currencies" do
+    Application.put_env(:currency_formatter, :whitelist,  ["EUR", "USD", "CAD"])
+    [{"CAD", "C$"}, {"EUR", "€"}, {"USD", "US$"}] = CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
   end
 end
 
