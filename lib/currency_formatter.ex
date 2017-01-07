@@ -106,7 +106,7 @@ defmodule CurrencyFormatter do
   """
   @spec get_currencies_for_select() :: [{String.t, String.t}]
   def get_currencies_for_select do
-    get_currencies
+    get_currencies()
     |> Enum.map( fn({_, c}) -> c["iso_code"] end)
     |> Enum.sort
   end
@@ -126,17 +126,17 @@ defmodule CurrencyFormatter do
   """
   @spec get_currencies_for_select(Atom.t) :: [{String.t, String.t}]
   def get_currencies_for_select(:names) do
-    get_currencies
+    get_currencies()
     |> map_names
     |> Enum.sort
   end
   def get_currencies_for_select(:symbols) do
-    get_currencies
+    get_currencies()
     |> map_symbols
     |> Enum.sort
   end
   def get_currencies_for_select(:disambiguate_symbols) do
-    get_currencies
+    get_currencies()
     |> map_disambiguate_symbols
     |> Enum.sort
   end
