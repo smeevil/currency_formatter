@@ -6,11 +6,11 @@ defmodule CurrencyFormatter.Mixfile do
       app: :currency_formatter,
       version: "0.4.4",
       description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
-      package: package,
+      package: package(),
       elixir: "~> 1.3",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      deps: deps,
+      deps: deps(),
       preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
       test_coverage: [tool: ExCoveralls]
      ]
