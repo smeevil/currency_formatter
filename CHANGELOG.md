@@ -1,3 +1,6 @@
+## 0.4.5 (2017-01-09)
+Thanks to @marceldegraaf for removing deprecation warnings for elixir 1.4
+
 ## 0.4.4 (2016-12-07)
 Added a configuration option so you can whitelist supported currencies. To make use of this you can update you app's config.exs with
 
