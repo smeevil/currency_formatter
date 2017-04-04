@@ -1,3 +1,5 @@
+## 0.4.6 (2017-04-04)
+  - bumped deps
 ## 0.4.5 (2017-01-09)
 Thanks to @marceldegraaf for removing deprecation warnings for elixir 1.4
 
@@ -12,10 +14,10 @@ Thank you @vraravam for the suggestion :)
 
 ## 0.4.3 (2016-10-31)
   - Updated data source, returning usd by default. Thank you @optikfluffel !
-  - bumped specs
+  - bumped deps
 
 ## 0.4.2 (2016-08-11)
-  - bumped specs
+  - bumped deps
 
 ## 0.4.1 (2016-08-01)
   - Added a new function CurrencyFormatter.symbol/1 which will return the disambiguous currency symbol
