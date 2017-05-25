@@ -1,3 +1,6 @@
+## 0.4.7 (2017-05-25)
+Thanks to @jknipp for syncing up with the latest version of the currency_iso.json
+
 ## 0.4.6 (2017-04-04)
   - bumped deps
 ## 0.4.5 (2017-01-09)
