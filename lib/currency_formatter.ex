@@ -84,16 +84,23 @@ defmodule CurrencyFormatter do
   """
   @spec get_currencies() :: Map.t
   def get_currencies do
-    @currencies |> whitelist
+    @currencies 
+    |> whitelist(Application.get_env(:currency_formatter, :whitelist))
+    |> blacklist(Application.get_env(:currency_formatter, :blacklist))
   end
 
-  defp whitelist(currencies) do
-    whitelist = Application.get_env(:currency_formatter, :whitelist)
-    if whitelist == nil do
-      currencies
-    else
-      Enum.filter(currencies, fn {_, %{"iso_code" => iso_code}} -> Enum.member?(whitelist, iso_code) end)
-    end
+  defp whitelist(currencies, nil), do: currencies
+  defp whitelist(currencies, whitelist) do
+    Map.take(currencies, downcase(whitelist))
+  end
+
+  defp blacklist(currencies, nil), do: currencies
+  defp blacklist(currencies, blacklist) do
+    Map.drop(currencies, downcase(blacklist))
+  end
+
+  defp downcase(list) when is_list(list) do
+    list |> Enum.map(fn(val) -> String.downcase(val) end)
   end
 
   @doc """

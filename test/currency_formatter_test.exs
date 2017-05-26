@@ -5,8 +5,10 @@ defmodule CurrencyFormatterTest do
 
   setup do
     previous = Application.get_env(:currency_formatter, :whitelist)
+    previous_blacklist = Application.get_env(:currency_formatter, :blacklist)
     on_exit fn ->
       Application.put_env(:currency_formatter, :whitelist,  previous)
+      Application.put_env(:currency_formatter, :blacklist,  previous_blacklist)
     end
     :ok
   end
@@ -114,6 +116,19 @@ defmodule CurrencyFormatterTest do
   test "get_currencies_for_select should only return whitelisted currencies" do
     Application.put_env(:currency_formatter, :whitelist,  ["EUR", "USD", "CAD"])
     [{"CAD", "C$"}, {"EUR", "€"}, {"USD", "US$"}] = CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
+  end
+
+  test "get_currencies should return all currencies except blacklisted currencies" do
+    blacklist = ["XDR", "XAG", "XAU"]
+    Application.put_env(:currency_formatter, :blacklist,  blacklist)
+    
+    currencies = CurrencyFormatter.get_currencies()
+    [] = currencies |> Enum.filter(fn {_, %{"iso_code" => iso_code}} -> Enum.member?(blacklist, iso_code) end)
+    
+    blacklist |> Enum.each(fn(code) -> 
+      assert Map.get(currencies, String.downcase(code)) == nil 
+    end)
+    
   end
 end
 

@@ -81,11 +81,19 @@ end
 ```
 
 ## Setup
-By default you will have 172 currencies available, if you would like to limit the list you can configure a whitelist in your app's config.exs like :
+By default you will have 172 currencies available, there are two configuration options that can be set in your app's `config.exs` file to limit the number of currencies.
+
+If you would like to limit the list to only include specific currencies, you can configure a whitelist by passing a list of ISO codes to include:
+
 ```elixir
 config :currency_formatter, :whitelist, ["EUR", "GBP", "USD"]
 ```
 
+To exclude certain currencies from the list, you can configure a blacklist using a list of ISO codes to exclude:
+
+```elixir
+config :currency_formatter, :blacklist, ["XDR", "XAG", "XAU"]
+```
 
 ## Documentation
 
