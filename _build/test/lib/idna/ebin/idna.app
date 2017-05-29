@@ -1,0 +1,10 @@
+{application,idna,
+             [{description,"A pure Erlang IDNA implementation"},
+              {vsn,"4.0.0"},
+              {modules,[idna,idna_ucs,idna_unicode,idna_unicode_data,
+                        punycode]},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {maintainers,["Benoit Chesneau"]},
+              {licenses,["BSD"]},
+              {links,[{"Github","https://github.com/benoitc/erlang-idna"}]}]}.

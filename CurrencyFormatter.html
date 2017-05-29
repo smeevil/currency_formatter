@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>CurrencyFormatter – currency_formatter v0.4.1</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.15.0">
+    <title>CurrencyFormatter – currency_formatter v0.4.8</title>
+    <link rel="stylesheet" href="dist/app-091c05798a.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+    <script src="dist/sidebar_items-c2fdd9adea.js"></script>
   </head>
   <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
 
     <div class="main">
 <button class="sidebar-toggle">
@@ -25,7 +26,7 @@
         currency_formatter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.4.1
+        v0.4.8
       </h2>
     </div>
     
@@ -47,9 +48,8 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
@@ -58,14 +58,14 @@
 
 
       <h1>
-        <small class="visible-xs">currency_formatter v0.4.1</small>
+        <small class="visible-xs">currency_formatter v0.4.8</small>
         CurrencyFormatter
         
         
       </h1>
 
       
-        <section id="moduledoc" class="docstring">
+        <section id="moduledoc">
           <p>This module takes care of formatting a number to a currency.
 You can also request a map containing all the formatting settings for a currency.</p>
 
@@ -147,8 +147,6 @@ You can also request a map containing all the formatting settings for a currency
 
           
 
-          
-
         </section>
       
 
@@ -163,6 +161,9 @@ You can also request a map containing all the formatting settings for a currency
             Functions
           </h1>
           <div class="detail" id="format/2">
+  
+    <span id="format/1" />
+  
   <div class="detail-header">
     <a href="#format/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -170,22 +171,23 @@ You can also request a map containing all the formatting settings for a currency
     <span class="signature">format(number, currency \\ :USD)</span>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">format(<a href="http://elixir-lang.org/docs/stable/elixir/Integer.html#t:t/0">Integer.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/Atom.html#t:t/0">Atom.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
+          <pre>format(<a href="https://hexdocs.pm/elixir/Integer.html#t:t/0">Integer.t</a>, <a href="https://hexdocs.pm/elixir/Atom.html#t:t/0">Atom.t</a>) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a></pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Formats a number to currency</p>
-<h2>examples</h2>
+<h2 id="format/2-examples" class="section-heading">
+  <a href="#format/2-examples" class="hover-link"><i class="icon-link"></i></a>
+  examples
+</h2>
+
 <pre><code class="iex elixir">iex&gt; CurrencyFormatter.format(123456)
-&quot;$1,234.56&quot;
+&quot;US$1,234.56&quot;
 
 iex&gt; CurrencyFormatter.format(654321, :eur)
 &quot;€6.543,21&quot;
@@ -196,6 +198,7 @@ iex&gt; CurrencyFormatter.format(654321, &quot;AUD&quot;)
   </section>
 </div>
 <div class="detail" id="get_currencies/0">
+  
   <div class="detail-header">
     <a href="#get_currencies/0" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -203,33 +206,35 @@ iex&gt; CurrencyFormatter.format(654321, &quot;AUD&quot;)
     <span class="signature">get_currencies()</span>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">get_currencies :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+          <pre>get_currencies() :: <a href="https://hexdocs.pm/elixir/Map.html#t:t/0">Map.t</a></pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Returns a map containing the full list of currencies</p>
-<h2>examples</h2>
+<h2 id="get_currencies/0-examples" class="section-heading">
+  <a href="#get_currencies/0-examples" class="hover-link"><i class="icon-link"></i></a>
+  examples
+</h2>
+
 <pre><code class="iex elixir">iex&gt; currencies = CurrencyFormatter.get_currencies()
 iex&gt; Enum.count(currencies)
-165
+172
 iex&gt; currencies[&quot;usd&quot;]
-%{&quot;alternate_symbols&quot; =&gt; [&quot;US$&quot;], &quot;decimal_mark&quot; =&gt; &quot;.&quot;, &quot;html_entity&quot; =&gt; &quot;$&quot;,
-  &quot;iso_code&quot; =&gt; &quot;USD&quot;, &quot;iso_numeric&quot; =&gt; &quot;840&quot;, &quot;name&quot; =&gt; &quot;United States Dollar&quot;,
-  &quot;priority&quot; =&gt; 1, &quot;smallest_denomination&quot; =&gt; 1, &quot;subunit&quot; =&gt; &quot;Cent&quot;,
-  &quot;subunit_to_unit&quot; =&gt; 100, &quot;symbol&quot; =&gt; &quot;$&quot;, &quot;symbol_first&quot; =&gt; true,
-  &quot;thousands_separator&quot; =&gt; &quot;,&quot;}</code></pre>
+%{&quot;alternate_symbols&quot; =&gt; [&quot;US$&quot;], &quot;decimal_mark&quot; =&gt; &quot;.&quot;,
+&quot;disambiguate_symbol&quot; =&gt; &quot;US$&quot;, &quot;html_entity&quot; =&gt; &quot;$&quot;, &quot;iso_code&quot; =&gt; &quot;USD&quot;,
+&quot;iso_numeric&quot; =&gt; &quot;840&quot;, &quot;name&quot; =&gt; &quot;United States Dollar&quot;, &quot;priority&quot; =&gt; 1,
+&quot;smallest_denomination&quot; =&gt; 1, &quot;subunit&quot; =&gt; &quot;Cent&quot;, &quot;subunit_to_unit&quot; =&gt; 100,
+&quot;symbol&quot; =&gt; &quot;$&quot;, &quot;symbol_first&quot; =&gt; true, &quot;thousands_separator&quot; =&gt; &quot;,&quot;}</code></pre>
 
   </section>
 </div>
 <div class="detail" id="get_currencies_for_select/0">
+  
   <div class="detail-header">
     <a href="#get_currencies_for_select/0" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -237,26 +242,28 @@ iex&gt; currencies[&quot;usd&quot;]
     <span class="signature">get_currencies_for_select()</span>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">get_currencies_for_select :: [{<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}]</code></pre>
+          <pre>get_currencies_for_select() :: [{<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>}]</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Returns a List with tuples that can be used as options for select</p>
-<h2>Examples</h2>
+<h2 id="get_currencies_for_select/0-examples" class="section-heading">
+  <a href="#get_currencies_for_select/0-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">CurrencyFormatter.get_currencies_for_select()
 [&quot;AED&quot;, &quot;AFN&quot;, &quot;ALL&quot;,...]</code></pre>
 
   </section>
 </div>
 <div class="detail" id="get_currencies_for_select/1">
+  
   <div class="detail-header">
     <a href="#get_currencies_for_select/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -264,20 +271,21 @@ iex&gt; currencies[&quot;usd&quot;]
     <span class="signature">get_currencies_for_select(format)</span>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">get_currencies_for_select(<a href="http://elixir-lang.org/docs/stable/elixir/Atom.html#t:t/0">Atom.t</a>) :: [{<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}]</code></pre>
+          <pre>get_currencies_for_select(<a href="https://hexdocs.pm/elixir/Atom.html#t:t/0">Atom.t</a>) :: [{<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>}]</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Returns a List with tuples that can be used as options for select</p>
-<h2>Examples</h2>
+<h2 id="get_currencies_for_select/1-examples" class="section-heading">
+  <a href="#get_currencies_for_select/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">CurrencyFormatter.get_currencies_for_select(:names)
 [{&quot;AED&quot;, &quot;United Arab Emirates Dirham&quot;}, {&quot;AFN&quot;, &quot;Afghan Afghani&quot;} , {&quot;ALL&quot;, &quot;Albanian Lek&quot;}, ...]
 
@@ -290,6 +298,9 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
   </section>
 </div>
 <div class="detail" id="instructions/1">
+  
+    <span id="instructions/0" />
+  
   <div class="detail-header">
     <a href="#instructions/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -297,22 +308,23 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
     <span class="signature">instructions(currency \\ :USD)</span>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">instructions(<a href="http://elixir-lang.org/docs/stable/elixir/Atom.html#t:t/0">Atom.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+          <pre>instructions(<a href="https://hexdocs.pm/elixir/Atom.html#t:t/0">Atom.t</a>) :: <a href="https://hexdocs.pm/elixir/Map.html#t:t/0">Map.t</a></pre>
         
-          <pre><code class="elixir">instructions(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/Map.html#t:t/0">Map.t</a></code></pre>
+          <pre>instructions(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>) :: <a href="https://hexdocs.pm/elixir/Map.html#t:t/0">Map.t</a></pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Returns a map with formatting settings for a currency</p>
-<h2>examples</h2>
+<h2 id="instructions/1-examples" class="section-heading">
+  <a href="#instructions/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  examples
+</h2>
+
 <pre><code class="iex elixir">iex&gt; CurrencyFormatter.instructions(:EUR)
 %{&quot;alternate_symbols&quot; =&gt; [], &quot;decimal_mark&quot; =&gt; &quot;,&quot;, &quot;html_entity&quot; =&gt; &quot;&amp;#x20AC;&quot;,
 &quot;iso_code&quot; =&gt; &quot;EUR&quot;, &quot;iso_numeric&quot; =&gt; &quot;978&quot;, &quot;name&quot; =&gt; &quot;Euro&quot;, &quot;priority&quot; =&gt; 2,
@@ -322,6 +334,7 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
   </section>
 </div>
 <div class="detail" id="symbol/1">
+  
   <div class="detail-header">
     <a href="#symbol/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -329,11 +342,15 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
     <span class="signature">symbol(currency)</span>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Returns the disambiguous symbol of a currency</p>
-<h2>Example</h2>
+<h2 id="symbol/1-example" class="section-heading">
+  <a href="#symbol/1-example" class="hover-link"><i class="icon-link"></i></a>
+  Example
+</h2>
+
 <pre><code class="iex elixir">iex&gt; CurrencyFormatter.symbol(:AUD)
 &quot;A$&quot;</code></pre>
 
@@ -344,13 +361,11 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
       
 
       
-
-      
           <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.15.0),
           </span>
           <span class="line">
             designed by
@@ -363,7 +378,7 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-372682077e.js"></script>
   </body>
 </html>
 

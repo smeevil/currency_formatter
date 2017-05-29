@@ -1,0 +1,4 @@
+<%= head_template(config, %{title: title}) %>
+    <%= content %>
+  </body>
+</html>
