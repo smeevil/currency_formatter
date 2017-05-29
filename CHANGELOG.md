@@ -1,3 +1,11 @@
+## 0.4.8 (2017-05-29)
+Thanks to @jknipp for adding blacklist support.
+You can configure this in the settings just like you configure the whitelist
+
+```elixir
+config :currency_formatter, :blacklist, ["XDR", "XAG", "XAU"]
+```
+
 ## 0.4.7 (2017-05-25)
 Thanks to @jknipp for syncing up with the latest version of the currency_iso.json
 
