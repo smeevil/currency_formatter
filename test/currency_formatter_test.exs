@@ -20,7 +20,7 @@ defmodule CurrencyFormatterTest do
     assert "A$0.01" = CurrencyFormatter.format(1, :AUD)
   end
 
-  test "should format an amount_in_cents as integer to a price in euro" do
+  test "should format an amount_in_cents as integer to a price in dollars" do
     assert "US$0.01" = CurrencyFormatter.format(1)
     assert "US$0.12" = CurrencyFormatter.format(12)
     assert "US$1.23" = CurrencyFormatter.format(123)
@@ -34,10 +34,12 @@ defmodule CurrencyFormatterTest do
     assert "US$123,456.78" = CurrencyFormatter.format(12345678)
     assert "US$1,234,567.89" = CurrencyFormatter.format(123456789)
     assert "US$12,345,678.90" = CurrencyFormatter.format(1234567890)
+    assert "US$-113,728" = CurrencyFormatter.format(-11372800)
+    assert "US$-499" = CurrencyFormatter.format(-49900)
     assert "US$1" = CurrencyFormatter.format(100)
   end
 
-  test "should format an amount_in_cents as integer to a price in dollars" do
+  test "should format an amount_in_cents as integer to a price in euros" do
     assert "€0,01" = CurrencyFormatter.format(1, :eur)
     assert "€0,12" = CurrencyFormatter.format(12, :eur)
     assert "€1,23" = CurrencyFormatter.format(123, :eur)
@@ -51,6 +53,8 @@ defmodule CurrencyFormatterTest do
     assert "€123.456,78" = CurrencyFormatter.format(12345678, :eur)
     assert "€1.234.567,89" = CurrencyFormatter.format(123456789, :eur)
     assert "€12.345.678,90" = CurrencyFormatter.format(1234567890, :eur)
+    assert "€-113.728" = CurrencyFormatter.format(-11372800, :eur)
+    assert "€-499" = CurrencyFormatter.format(-49900, :eur)
     assert "€1" = CurrencyFormatter.format(100, :eur)
   end
 
