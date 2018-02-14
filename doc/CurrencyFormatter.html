@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="dist/app-091c05798a.css" />
     
     
-    <script src="dist/sidebar_items-8ac36d397e.js"></script>
+    <script src="dist/sidebar_items-1205175a94.js"></script>
     
   </head>
   <body data-type="modules">
@@ -94,7 +94,16 @@ You can also request a map containing all the formatting settings for a currency
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#format/2">format(number, currency \\ :USD)</a>
+    <a href="#disambiguous_symbol/1">disambiguous_symbol(currency)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the disambiguous symbol of a currency</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#format/3">format(number, currency, opts \\ [])</a>
   </div>
   
     <div class="summary-synopsis"><p>Formats a number to currency</p>
@@ -142,7 +151,7 @@ You can also request a map containing all the formatting settings for a currency
     <a href="#symbol/1">symbol(currency)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the disambiguous symbol of a currency</p>
+    <div class="summary-synopsis"><p>Returns the symbol of a currency</p>
 </div>
   
 </div>
@@ -166,36 +175,64 @@ You can also request a map containing all the formatting settings for a currency
             </a>
             Functions
           </h1>
-          <div class="detail" id="format/2">
+          <div class="detail" id="disambiguous_symbol/1">
   
-  
-    <span id="format/1"></span>
   
   <div class="detail-header">
-    <a href="#format/2" class="detail-link" title="Link to this function">
+    <a href="#disambiguous_symbol/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">format(number, currency \\ :USD)</span>
+    <span class="signature">disambiguous_symbol(currency)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the disambiguous symbol of a currency</p>
+<h2 id="disambiguous_symbol/1-example" class="section-heading">
+  <a href="#disambiguous_symbol/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
+<pre><code class="iex elixir">iex&gt; CurrencyFormatter.disambiguous_symbol(:AUD)
+&quot;A$&quot;</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="format/3">
+  
+  
+    <span id="format/2"></span>
+  
+  <div class="detail-header">
+    <a href="#format/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">format(number, currency, opts \\ [])</span>
     
     
     
   </div>
   <section class="docstring">
     <p>Formats a number to currency</p>
-<h2 id="format/2-examples" class="section-heading">
-  <a href="#format/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h2 id="format/3-examples" class="section-heading">
+  <a href="#format/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   examples
 </h2>
 
-<pre><code class="iex elixir">iex&gt; CurrencyFormatter.format(123456)
-&quot;US$1,234.56&quot;
+<pre><code class="iex elixir">iex&gt; CurrencyFormatter.format(123456, :usd)
+&quot;$1,234.56&quot;
 
 iex&gt; CurrencyFormatter.format(654321, :eur)
 &quot;€6.543,21&quot;
 
 iex&gt; CurrencyFormatter.format(654321, &quot;AUD&quot;)
-&quot;A$6,543.21&quot;</code></pre>
+&quot;$6,543.21&quot;
+
+iex&gt; CurrencyFormatter.format(123456, &quot;AUD&quot;, disambiguate: true)
+&quot;A$1,234.56&quot;</code></pre>
 
   </section>
 </div>
@@ -321,9 +358,9 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
     
       <div class="specs">
         
-          <pre>instructions(atom) :: map</pre>
-        
           <pre>instructions(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>) :: map</pre>
+        
+          <pre>instructions(atom) :: map</pre>
         
       </div>
     
@@ -359,18 +396,20 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
         
           <pre>symbol(atom) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a></pre>
         
+          <pre>symbol(atom) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a></pre>
+        
       </div>
     
   </div>
   <section class="docstring">
-    <p>Returns the disambiguous symbol of a currency</p>
+    <p>Returns the symbol of a currency</p>
 <h2 id="symbol/1-example" class="section-heading">
   <a href="#symbol/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Example
 </h2>
 
 <pre><code class="iex elixir">iex&gt; CurrencyFormatter.symbol(:AUD)
-&quot;A$&quot;</code></pre>
+&quot;$&quot;</code></pre>
 
   </section>
 </div>

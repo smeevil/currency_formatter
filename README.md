@@ -9,13 +9,20 @@ The JSON iso data has been gracefully borrowed from the [ruby money](https://git
 
 Formatting cents to currency string
 ```elixir
-iex> CurrencyFormatter.format(123456)
-"US$1,234.56"
-
 iex> CurrencyFormatter.format(654321, :eur)
 "€6.543,21"
 
+
+iex> CurrencyFormatter.format(123456)
+"$1,234.56"
+
 iex> CurrencyFormatter.format(654321, "AUD")
+"$6,543.21"
+
+iex> CurrencyFormatter.format(123456, disambiguate: true)
+"US$1,234.56"
+
+iex> CurrencyFormatter.format(654321, "AUD", disambiguate: true)
 "A$6,543.21"
 ```
 

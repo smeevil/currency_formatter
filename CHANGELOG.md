@@ -1,3 +1,11 @@
+## 0.6.0 (2018-02-14)
+- Updated readme to cover the new disambiguate option
+- Bumped deps
+
+Thanks @duff for :
+- For fixing a bug causing extraneous separator showing up at the front of negative values.
+- Default behaviour is now to _not_ use disambiguate symbols, which can be turned on again by using an option like `CurrencyFormatter.format(123456, "AUD", disambiguate: true)`
+
 ## 0.5.0 (2017-10-06)
 
 - Reformatted and cleaned upcode
