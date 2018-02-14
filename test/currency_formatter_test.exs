@@ -15,28 +15,28 @@ defmodule CurrencyFormatterTest do
 
   test "should correctly format in euro and dollars" do
     assert "€0,01" == CurrencyFormatter.format(1, :eur)
-    assert "US$0.01" == CurrencyFormatter.format(1, "USD")
+    assert "$0.01" == CurrencyFormatter.format(1, "USD")
     assert "0,01Ft" == CurrencyFormatter.format(1, "huf")
-    assert "A$0.01" == CurrencyFormatter.format(1, :AUD)
+    assert "$0.01" == CurrencyFormatter.format(1, :AUD)
   end
 
   test "should format an amount_in_cents as integer to a price in dollars" do
-    assert "US$0.01" == CurrencyFormatter.format(1)
-    assert "US$0.12" == CurrencyFormatter.format(12)
-    assert "US$1.23" == CurrencyFormatter.format(123)
-    assert "US$12.34" == CurrencyFormatter.format(1234)
-    assert "US$123.45" == CurrencyFormatter.format(12345)
-    assert "US$1,234.56" == CurrencyFormatter.format(123456)
-    assert "US$1,000" == CurrencyFormatter.format(100000)
-    assert "US$-1,000" == CurrencyFormatter.format(-100000)
-    assert "US$12,345.67" == CurrencyFormatter.format(1234567)
-    assert "US$-12,345.67" == CurrencyFormatter.format(-1234567)
-    assert "US$123,456.78" == CurrencyFormatter.format(12345678)
-    assert "US$1,234,567.89" == CurrencyFormatter.format(123456789)
-    assert "US$12,345,678.90" == CurrencyFormatter.format(1234567890)
-    assert "US$-113,728" == CurrencyFormatter.format(-11372800)
-    assert "US$-499" == CurrencyFormatter.format(-49900)
-    assert "US$1" == CurrencyFormatter.format(100)
+    assert "$0.01" == CurrencyFormatter.format(1, :usd)
+    assert "$0.12" == CurrencyFormatter.format(12, :usd)
+    assert "$1.23" == CurrencyFormatter.format(123, :usd)
+    assert "$12.34" == CurrencyFormatter.format(1234, :usd)
+    assert "$123.45" == CurrencyFormatter.format(12345, :usd)
+    assert "$1,234.56" == CurrencyFormatter.format(123456, :usd)
+    assert "$1,000" == CurrencyFormatter.format(100000, :usd)
+    assert "$-1,000" == CurrencyFormatter.format(-100000, :usd)
+    assert "$12,345.67" == CurrencyFormatter.format(1234567, :usd)
+    assert "$-12,345.67" == CurrencyFormatter.format(-1234567, :usd)
+    assert "$123,456.78" == CurrencyFormatter.format(12345678, :usd)
+    assert "$1,234,567.89" == CurrencyFormatter.format(123456789, :usd)
+    assert "$12,345,678.90" == CurrencyFormatter.format(1234567890, :usd)
+    assert "$-113,728" == CurrencyFormatter.format(-11372800, :usd)
+    assert "$-499" == CurrencyFormatter.format(-49900, :usd)
+    assert "$1" == CurrencyFormatter.format(100, :usd)
   end
 
   test "should format an amount_in_cents as integer to a price in euros" do
@@ -59,21 +59,29 @@ defmodule CurrencyFormatterTest do
   end
 
   test "should format an amount_in_cents as string to a price" do
-    assert "US$0.01" == CurrencyFormatter.format("1")
-    assert "US$0.12" == CurrencyFormatter.format("12")
-    assert "US$1.23" == CurrencyFormatter.format("12.3")
-    assert "US$12.34" == CurrencyFormatter.format("12.34")
-    assert "US$123.45" == CurrencyFormatter.format("123,45")
-    assert "US$1,234.56" == CurrencyFormatter.format("1234,56")
-    assert "US$12,345.67" == CurrencyFormatter.format("12345.67")
-    assert "US$123,456.78" == CurrencyFormatter.format("123456,78")
-    assert "US$1,234,567.89" == CurrencyFormatter.format("1234567.89")
-    assert "US$12,345,678.90" == CurrencyFormatter.format("12345678,90")
-    assert "US$1" == CurrencyFormatter.format("1.00")
+    assert "$0.01" == CurrencyFormatter.format("1", :usd)
+    assert "$0.12" == CurrencyFormatter.format("12", :usd)
+    assert "$1.23" == CurrencyFormatter.format("12.3", :usd)
+    assert "$12.34" == CurrencyFormatter.format("12.34", :usd)
+    assert "$123.45" == CurrencyFormatter.format("123,45", :usd)
+    assert "$1,234.56" == CurrencyFormatter.format("1234,56", :usd)
+    assert "$12,345.67" == CurrencyFormatter.format("12345.67", :usd)
+    assert "$123,456.78" == CurrencyFormatter.format("123456,78", :usd)
+    assert "$1,234,567.89" == CurrencyFormatter.format("1234567.89", :usd)
+    assert "$12,345,678.90" == CurrencyFormatter.format("12345678,90", :usd)
+    assert "$1" == CurrencyFormatter.format("1.00", :usd)
   end
 
   test "should use a currency symbol when given" do
-    assert "US$1,234,567.89" == CurrencyFormatter.format(123456789, :USD)
+    assert "$1,234,567.89" == CurrencyFormatter.format(123456789, :USD)
+  end
+
+  test "should allow the ability to disambiguate the currency symbol" do
+    assert "US$12.34" == CurrencyFormatter.format(1234, :usd, disambiguate: true)
+    assert "C$12.34" == CurrencyFormatter.format(1234, :cad, disambiguate: true)
+
+    assert "$12.34" == CurrencyFormatter.format(1234, :usd, disambiguate: false)
+    assert "$12.34" == CurrencyFormatter.format(1234, :cad, disambiguate: false)
   end
 
   test "should return a map with formatting instructions" do
@@ -102,7 +110,15 @@ defmodule CurrencyFormatterTest do
   end
 
   test "symbol" do
-    assert "A$" = CurrencyFormatter.symbol(:AUD)
+    assert "$" == CurrencyFormatter.symbol(:AUD)
+  end
+
+  test "disambiguous_symbol" do
+    assert "A$" == CurrencyFormatter.disambiguous_symbol(:AUD)
+  end
+
+  test "disambiguous_symbol default to symbol if the currency doesn't have a disambiguate_symbol" do
+    assert "դր." == CurrencyFormatter.disambiguous_symbol(:amd)
   end
 
   test "should return a list usable for select dropdowns using currency symbols" do
@@ -132,7 +148,6 @@ defmodule CurrencyFormatterTest do
     blacklist |> Enum.each(fn(code) ->
       assert Map.get(currencies, String.downcase(code)) == nil
     end)
-
   end
 end
 

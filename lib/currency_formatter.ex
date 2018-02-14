@@ -13,27 +13,30 @@ defmodule CurrencyFormatter do
 
   ## examples
 
-      iex> CurrencyFormatter.format(123456)
-      "US$1,234.56"
+      iex> CurrencyFormatter.format(123456, :usd)
+      "$1,234.56"
 
       iex> CurrencyFormatter.format(654321, :eur)
       "€6.543,21"
 
       iex> CurrencyFormatter.format(654321, "AUD")
-      "A$6,543.21"
+      "$6,543.21"
+
+      iex> CurrencyFormatter.format(123456, "AUD", disambiguate: true)
+      "A$1,234.56"
 
   """
-  @spec format(String.t | number | atom) :: String.t
-  def format(number, currency \\ :USD)
-  def format(number, currency) when is_atom(currency) do
-    format(number, Atom.to_string(currency))
+  @spec format(String.t | number | atom, String.t) :: String.t
+  def format(number, currency, opts \\ [])
+  def format(number, currency, opts) when is_atom(currency) do
+    format(number, Atom.to_string(currency), opts)
   end
-  def format(number, currency) when is_integer(number) do
+  def format(number, currency, opts) when is_integer(number) do
     number
     |> to_string
-    |> format(currency)
+    |> format(currency, opts)
   end
-  def format(number_string, currency) when is_binary(number_string) and is_binary(currency) do
+  def format(number_string, currency, opts) when is_binary(number_string) and is_binary(currency) do
     format = instructions(currency)
 
     number_string
@@ -42,7 +45,7 @@ defmodule CurrencyFormatter do
     |> add_padding
     |> split_units_and_subunits
     |> handle_cents(format)
-    |> set_symbol(format)
+    |> set_symbol(format, opts)
   end
 
   @doc """
@@ -159,12 +162,12 @@ defmodule CurrencyFormatter do
       do: raise "#{inspect format} is not supported, please use either :names, :symbols or :disambiguate_symbols"
 
   @doc"""
-  Returns the disambiguous symbol of a currency
+  Returns the symbol of a currency
 
   ## Example
 
       iex> CurrencyFormatter.symbol(:AUD)
-      "A$"
+      "$"
 
   """
   @spec symbol(atom) :: String.t
@@ -172,6 +175,22 @@ defmodule CurrencyFormatter do
     currency
     |> CurrencyFormatter.instructions
     |> get_symbol
+  end
+
+  @doc"""
+  Returns the disambiguous symbol of a currency
+
+  ## Example
+
+      iex> CurrencyFormatter.disambiguous_symbol(:AUD)
+      "A$"
+
+  """
+  @spec symbol(atom) :: String.t
+  def disambiguous_symbol(currency) do
+    currency
+    |> CurrencyFormatter.instructions
+    |> get_disambiguous_symbol
   end
 
   @spec map_names(map) :: [map]
@@ -223,11 +242,16 @@ defmodule CurrencyFormatter do
     |> Kernel.to_string
   end
 
-  @spec set_symbol(String.t, map) :: String.t
-  defp set_symbol(number_string, %{"symbol_first" => true} = config), do: get_symbol(config) <> number_string
-  defp set_symbol(number_string, config), do: number_string <> get_symbol(config)
+  @spec set_symbol(String.t, map, Keyword.t) :: String.t
+  defp set_symbol(number_string, %{"symbol_first" => true} = config, opts), do: get_symbol(config, opts) <> number_string
+  defp set_symbol(number_string, config, opts), do: number_string <> get_symbol(config, opts)
 
   @spec get_symbol(map) :: String.t
-  defp get_symbol(%{"disambiguate_symbol" => symbol}), do: symbol
   defp get_symbol(config), do: config["symbol"]
+  defp get_symbol(config, [disambiguate: true]), do: get_disambiguous_symbol(config)
+  defp get_symbol(config, _), do: get_symbol(config)
+
+  @spec get_disambiguous_symbol(map) :: String.t
+  defp get_disambiguous_symbol(%{"disambiguate_symbol" => symbol}), do: symbol
+  defp get_disambiguous_symbol(config), do: config["symbol"]
 end
