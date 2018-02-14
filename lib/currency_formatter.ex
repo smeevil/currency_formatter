@@ -210,6 +210,9 @@ defmodule CurrencyFormatter do
     |> Enum.reverse
     |> set_separators(format["thousands_separator"], "")
   end
+  defp set_separators([a, b, c, ?- | tail], separator, acc) do
+    set_separators([?- | tail], separator, [c, b, a | acc])
+  end
   defp set_separators([a, b, c, d | tail], separator, acc) do
     set_separators([d | tail], separator, [separator, c, b, a | acc])
   end
