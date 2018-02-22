@@ -4,7 +4,7 @@ defmodule CurrencyFormatter.Mixfile do
   def project do
     [
       app: :currency_formatter,
-      version: "0.6.0",
+      version: "0.7.0",
       description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
       package: package(),
       elixir: "~> 1.5",
@@ -43,6 +43,7 @@ defmodule CurrencyFormatter.Mixfile do
       {:earmark, ">= 0.0.0", only: :dev},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:excoveralls, ">= 0.0.0", only: :test},
+      {:phoenix_html, ">= 0.0.0"},
       {:poison, "~> 3.1.0"},
     ]
   end

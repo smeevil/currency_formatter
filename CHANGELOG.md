@@ -1,3 +1,17 @@
+## 0.7.0 (2018-02-22)
+- you can now pass along the option `keep_decimals: true` with the formatters to ... wait for it... keep the decimals :)
+
+example :
+    assert "€1" == CurrencyFormatter.format(100, :eur)
+    assert "€1,00" == CurrencyFormatter.format(100, :eur, keep_decimals: true)
+
+- Added new methods to help with html formatting and warp the symbol and amount in spans with the class `currency-formatter-symbol` and `currency-formatter-amount`
+
+    - `html_format/2`
+    - `html_format/3`
+    - `raw_html_format/2`
+    - `raw_html_format/3`
+
 ## 0.6.0 (2018-02-14)
 - Updated readme to cover the new disambiguate option
 - Bumped deps

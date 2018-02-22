@@ -4,21 +4,27 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.17.1">
-    <title>CurrencyFormatter – currency_formatter v0.5.0</title>
+    <meta name="generator" content="ExDoc v0.18.2">
+    <title>CurrencyFormatter – currency_formatter v0.7.0</title>
     <link rel="stylesheet" href="dist/app-091c05798a.css" />
     
+    <script src="dist/sidebar_items-3874f7672b.js"></script>
     
-    <script src="dist/sidebar_items-1205175a94.js"></script>
+    
+    
     
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
     <div class="main">
-<button class="sidebar-toggle">
+<button class="sidebar-button sidebar-toggle">
   <span class="icon-menu" aria-hidden="true"></span>
   <span class="sr-only">Toggle Sidebar</span>
+</button>
+<button class="sidebar-button night-mode-toggle">
+  <span class="icon-theme" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Theme</span>
 </button>
 <section class="sidebar">
 
@@ -29,7 +35,7 @@
         currency_formatter
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.5.0
+        v0.7.0
       </h2>
     </div>
     
@@ -39,7 +45,7 @@
     <button type="submit" class="search-button">
       <span class="icon-search" aria-hidden="true"></span>
     </button>
-    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="Search" aria-label="Search" autocomplete="off" />
   </form>
 
   <ul class="sidebar-listNav">
@@ -63,7 +69,7 @@
 
 
       <h1>
-        <small class="visible-xs">currency_formatter v0.5.0</small>
+        <small class="visible-xs">currency_formatter v0.7.0</small>
         CurrencyFormatter
         
       </h1>
@@ -139,10 +145,30 @@ You can also request a map containing all the formatting settings for a currency
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#html_format/3">html_format(number, currency, opts \\ Keyword.new())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Formats a number to currency wrapped in span tags with classes in a Phoenix.HTML safe way
+You can directly use this in your phoenix templates</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#instructions/1">instructions(currency \\ :USD)</a>
   </div>
   
     <div class="summary-synopsis"><p>Returns a map with formatting settings for a currency</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#raw_html_format/3">raw_html_format(number, currency, opts \\ Keyword.new())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Formats a number to currency wrapped in span tags with classes.
+This will return html as a string without any escaping. When using phoenix, consider using the <code class="inline">format_html/1</code> function</p>
 </div>
   
 </div>
@@ -250,7 +276,7 @@ iex&gt; CurrencyFormatter.format(123456, &quot;AUD&quot;, disambiguate: true)
     
       <div class="specs">
         
-          <pre>get_currencies() :: map</pre>
+          <pre>get_currencies() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
         
       </div>
     
@@ -288,7 +314,7 @@ iex&gt; currencies[&quot;usd&quot;]
     
       <div class="specs">
         
-          <pre>get_currencies_for_select() :: [{<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>}]</pre>
+          <pre>get_currencies_for_select() :: [{<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}]</pre>
         
       </div>
     
@@ -319,7 +345,7 @@ iex&gt; currencies[&quot;usd&quot;]
     
       <div class="specs">
         
-          <pre>get_currencies_for_select(atom) :: [{<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>}]</pre>
+          <pre>get_currencies_for_select(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: [{<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}]</pre>
         
       </div>
     
@@ -342,6 +368,57 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
 
   </section>
 </div>
+<div class="detail" id="html_format/3">
+  
+  
+    <span id="html_format/2"></span>
+  
+  <div class="detail-header">
+    <a href="#html_format/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">html_format(number, currency, opts \\ Keyword.new())</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Formats a number to currency wrapped in span tags with classes in a Phoenix.HTML safe way
+You can directly use this in your phoenix templates.</p>
+<h2 id="html_format/3-example" class="section-heading">
+  <a href="#html_format/3-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  example
+</h2>
+
+<pre><code class="iex elixir">iex&gt; CurrencyFormatter.html_format(123456, &quot;EUR&quot;)
+[
+  safe: [
+    60,
+    &quot;span&quot;,
+    [[32, &quot;class&quot;, 61, 34, &quot;currency-formatter-symbol&quot;, 34]],
+    62,
+    &quot;€&quot;,
+    60,
+    47,
+    &quot;span&quot;,
+    62
+  ],
+  safe: [
+    60,
+    &quot;span&quot;,
+    [[32, &quot;class&quot;, 61, 34, &quot;currency-formatter-amount&quot;, 34]],
+    62,
+    &quot;1.234,56&quot;,
+    60,
+    47,
+    &quot;span&quot;,
+    62
+  ]
+]</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="instructions/1">
   
   
@@ -358,9 +435,9 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
     
       <div class="specs">
         
-          <pre>instructions(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>) :: map</pre>
+          <pre>instructions(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
         
-          <pre>instructions(atom) :: map</pre>
+          <pre>instructions(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
         
       </div>
     
@@ -380,6 +457,37 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
 
   </section>
 </div>
+<div class="detail" id="raw_html_format/3">
+  
+  
+    <span id="raw_html_format/2"></span>
+  
+  <div class="detail-header">
+    <a href="#raw_html_format/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">raw_html_format(number, currency, opts \\ Keyword.new())</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Formats a number to currency wrapped in span tags with classes.
+This will return html as a string without any escaping. When using phoenix, consider using the <code class="inline">format_html/1</code> function</p>
+<h2 id="raw_html_format/3-example" class="section-heading">
+  <a href="#raw_html_format/3-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  example
+</h2>
+
+<pre><code class="iex elixir">iex&gt; CurrencyFormatter.raw_html_format(123456, &quot;EUR&quot;)
+~s[&lt;span class=&quot;currency-formatter-symbol&quot;&gt;€&lt;/span&gt;&lt;span class=&quot;currency-formatter-amount&quot;&gt;1.234,56&lt;/span&gt;]
+
+iex&gt; CurrencyFormatter.raw_html_format(123400, &quot;EUR&quot;, keep_decimals: true)
+~s[&lt;span class=&quot;currency-formatter-symbol&quot;&gt;€&lt;/span&gt;&lt;span class=&quot;currency-formatter-amount&quot;&gt;1.234,00&lt;/span&gt;]</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="symbol/1">
   
   
@@ -394,9 +502,9 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
     
       <div class="specs">
         
-          <pre>symbol(atom) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a></pre>
+          <pre>symbol(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
         
-          <pre>symbol(atom) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a></pre>
+          <pre>symbol(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
         
       </div>
     
@@ -422,20 +530,22 @@ CurrencyFormatter.get_currencies_for_select(:disambiguate_symbols)
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.17.1),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.2),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-4cfb39be16.js"></script>
+  <script src="dist/app-574613960f.js"></script>
+  
+  
+  
   
   </body>
 </html>

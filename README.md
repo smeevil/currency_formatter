@@ -12,6 +12,12 @@ Formatting cents to currency string
 iex> CurrencyFormatter.format(654321, :eur)
 "€6.543,21"
 
+iex> CurrencyFormatter.format(654300, :eur)
+"€6.543"
+
+iex> CurrencyFormatter.format(654300, :eur, keep_decimals: true)
+"€6.543,00"
+
 
 iex> CurrencyFormatter.format(123456)
 "$1,234.56"
@@ -24,6 +30,43 @@ iex> CurrencyFormatter.format(123456, disambiguate: true)
 
 iex> CurrencyFormatter.format(654321, "AUD", disambiguate: true)
 "A$6,543.21"
+```
+
+Formatting cents to a currency raw html string
+```elixir
+      iex> CurrencyFormatter.raw_html_format(123456, "EUR")
+      ~s[<span class="currency-formatter-symbol">€</span><span class="currency-formatter-amount">1.234,56</span>]
+  """
+```
+
+Formatting cents to a currency safe(phoenix) html string
+
+```elixir
+iex> CurrencyFormatter.html_format(123456, "EUR")
+      [
+        safe: [
+          60,
+          "span",
+          [[32, "class", 61, 34, "currency-formatter-symbol", 34]],
+          62,
+          "€",
+          60,
+          47,
+          "span",
+          62
+        ],
+        safe: [
+          60,
+          "span",
+          [[32, "class", 61, 34, "currency-formatter-amount", 34]],
+          62,
+          "1.234,56",
+          60,
+          47,
+          "span",
+          62
+        ]
+      ]
 ```
 
 Requesting formatting instructions for a currency
