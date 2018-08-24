@@ -4,10 +4,10 @@ defmodule CurrencyFormatter.Mixfile do
   def project do
     [
       app: :currency_formatter,
-      version: "0.7.0",
+      version: "0.8.1",
       description: "A library to help with formatting a number to a currency using iso standards and other convenience functions related to formatting currencies",
       package: package(),
-      elixir: "~> 1.5",
+      elixir: "~> 1.7",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps(),
@@ -22,7 +22,7 @@ defmodule CurrencyFormatter.Mixfile do
         ],
       ],
       preferred_cli_env: [
-        "coveralls": :test,
+        coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test

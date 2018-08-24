@@ -22,6 +22,13 @@ defmodule CurrencyFormatterTest do
     assert "$0.01" == CurrencyFormatter.format(1, :AUD)
   end
 
+  test "it formats negative cents correctly" do
+    assert "€-0,05" == CurrencyFormatter.format(-5, :eur)
+    assert "$-0.05" == CurrencyFormatter.format(-5, "USD")
+    assert "€-0,53" == CurrencyFormatter.format(-53, :eur)
+    assert "$-0.53" == CurrencyFormatter.format(-53, "USD")
+  end
+
   test "should format an amount_in_cents as integer to a price in dollars" do
     assert "$0.01" == CurrencyFormatter.format(1, :usd)
     assert "$0.12" == CurrencyFormatter.format(12, :usd)

@@ -1,3 +1,9 @@
+## 0.8.1 (2018-08-24)
+- bumped deps
+
+## 0.8.0 (2018-08-24)
+- fixed formatting for negative cents, for example -5 and -53 would be displayed as €-,5 and €-,53. this has been remedied :)
+
 ## 0.7.0 (2018-02-22)
 - you can now pass along the option `keep_decimals: true` with the formatters to ... wait for it... keep the decimals :)
 

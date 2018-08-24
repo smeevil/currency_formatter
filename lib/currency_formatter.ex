@@ -280,7 +280,9 @@ defmodule CurrencyFormatter do
 
   @spec add_padding(String.t()) :: String.t()
   defp add_padding(""), do: "0,00"
+  defp add_padding("-" <> centified) when byte_size(centified) == 1, do: "-0,0" <> centified
   defp add_padding(centified) when byte_size(centified) == 1, do: "0,0" <> centified
+  defp add_padding("-," <> centified) when byte_size(centified) == 2, do: "-0," <> centified
   defp add_padding(centified) when byte_size(centified) == 2, do: "0," <> centified
   defp add_padding(centified), do: centified
 
