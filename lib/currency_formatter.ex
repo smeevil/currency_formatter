@@ -3,10 +3,17 @@ defmodule CurrencyFormatter do
   This module takes care of formatting a number to a currency.
   You can also request a map containing all the formatting settings for a currency.
   """
-
+  @non_iso_currencies "./lib/currency_non_iso.json"
+                  |> File.read!()
+                  |> Poison.decode!()
+  @old_currencies "./lib/currency_backwards_compatible.json"
+                  |> File.read!()
+                  |> Poison.decode!()
   @currencies "./lib/currency_iso.json"
               |> File.read!()
               |> Poison.decode!()
+              |> Map.merge(@old_currencies)
+              |> Map.merge(@non_iso_currencies)
 
   @doc """
   Formats a number to currency
