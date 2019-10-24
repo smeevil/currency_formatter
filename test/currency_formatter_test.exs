@@ -226,4 +226,9 @@ defmodule CurrencyFormatterTest do
       assert Map.get(currencies, String.downcase(code)) == nil
     end)
   end
+
+  test "can convert to html string" do
+    assert "<span class=\"currency-formatter-symbol\">€</span><span class=\"currency-formatter-amount\">0,01</span>" == CurrencyFormatter.html_format(1, :eur) |> Phoenix.HTML.safe_to_string()
+    assert "<span class=\"currency-formatter-amount\">1</span><span class=\"currency-formatter-symbol\">د.إ</span>" == CurrencyFormatter.format("1.00", "AED", html: true) |> Phoenix.HTML.safe_to_string()
+  end
 end

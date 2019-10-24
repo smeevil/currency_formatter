@@ -49,6 +49,7 @@ defmodule CurrencyFormatter do
     |> split_units_and_subunits
     |> handle_cents(format, opts)
     |> set_symbol(format, opts)
+    |> flatten()
   end
 
   @doc """
@@ -58,30 +59,11 @@ defmodule CurrencyFormatter do
   ## example
 
       iex> CurrencyFormatter.html_format(123456, "EUR")
-      [
-        safe: [
-          60,
-          "span",
-          [[32, "class", 61, 34, "currency-formatter-symbol", 34]],
-          62,
-          "€",
-          60,
-          47,
-          "span",
-          62
-        ],
-        safe: [
-          60,
-          "span",
-          [[32, "class", 61, 34, "currency-formatter-amount", 34]],
-          62,
-          "1.234,56",
-          60,
-          47,
-          "span",
-          62
-        ]
-      ]
+      {:safe,
+        [60, "span", 32, "class", 61, 34, "currency-formatter-symbol", 34,
+         62, "€", 60, 47, "span", 62, 60, "span", 32, "class", 61, 34,
+         "currency-formatter-amount", 34, 62, "1.234,56", 60, 47, "span",
+        62]}
   """
   def html_format(number, currency, opts \\ Keyword.new()) do
     opts = Keyword.put_new(opts, :html, true)
@@ -103,8 +85,7 @@ defmodule CurrencyFormatter do
   def raw_html_format(number, currency, opts \\ Keyword.new()) do
     number
     |> html_format(currency, opts)
-    |> Enum.map(&Phoenix.HTML.safe_to_string/1)
-    |> Enum.join("")
+    |> Phoenix.HTML.safe_to_string()
   end
 
   @doc """
@@ -336,8 +317,7 @@ defmodule CurrencyFormatter do
 
   defp set_symbol(number_string, config, opts) do
     if Keyword.get(opts, :html) do
-      spans = wrap_in_spans(amount: number_string, symbol: get_symbol(config, opts))
-      Phoenix.HTML.safe_to_string(spans)
+      wrap_in_spans(amount: number_string, symbol: get_symbol(config, opts))
     else
       number_string <> get_symbol(config, opts)
     end
@@ -365,4 +345,9 @@ defmodule CurrencyFormatter do
   @spec get_disambiguous_symbol(map) :: String.t()
   defp get_disambiguous_symbol(%{"disambiguate_symbol" => symbol}), do: symbol
   defp get_disambiguous_symbol(config), do: config["symbol"]
+
+  defp flatten(list) when is_list(list),
+    do: {:safe, list |> Enum.map(&(elem(&1, 1))) |> List.flatten()}
+
+  defp flatten(data), do: data
 end
