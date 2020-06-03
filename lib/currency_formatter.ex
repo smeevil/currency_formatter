@@ -26,7 +26,7 @@ defmodule CurrencyFormatter do
       "A$1,234.56"
 
   """
-  @spec format(String.t() | number | atom, String.t()) :: String.t()
+  @spec format(String.t() | number, atom | String.t()) :: String.t()
   def format(number, currency, opts \\ [])
 
   def format(number, currency, opts) when is_atom(currency) do
@@ -254,7 +254,7 @@ defmodule CurrencyFormatter do
       "A$"
 
   """
-  @spec symbol(atom) :: String.t()
+  @spec disambiguous_symbol(atom) :: String.t()
   def disambiguous_symbol(currency) do
     currency
     |> CurrencyFormatter.instructions()
@@ -289,7 +289,7 @@ defmodule CurrencyFormatter do
   @spec split_units_and_subunits(binary) :: [binary]
   defp split_units_and_subunits(string), do: String.split(string, ",", parts: 2)
 
-  @spec handle_cents(list, map, map) :: String.t()
+  @spec handle_cents(list, map, Keyword.t()) :: String.t()
   defp handle_cents([x, "00" = y], format, opts) do
     if Keyword.get(opts, :keep_decimals) do
       set_separators(x, format) <> format["decimal_mark"] <> y
@@ -355,7 +355,7 @@ defmodule CurrencyFormatter do
     Phoenix.HTML.Tag.content_tag(:span, text, class: class)
   end
 
-  @spec get_symbol(map, keyword | nil) :: String.t()
+  @spec get_symbol(map, Keyword.t()) :: String.t()
   defp get_symbol(config, opts \\ Keyword.new()) do
     if Keyword.get(opts, :disambiguate),
       do: get_disambiguous_symbol(config),
