@@ -39,13 +39,19 @@ defmodule CurrencyFormatter do
     |> format(currency, opts)
   end
 
-  def format(number_string, currency, opts) when is_binary(number_string) and is_binary(currency) do
+  def format(number_string, currency, opts)
+      when is_binary(number_string) and is_binary(currency) do
     format = instructions(currency)
+
+    decimal =
+      format["subunit_to_unit"]
+      |> Integer.digits()
+      |> Kernel.length()
 
     number_string
     |> remove_non_numbers
-    |> add_subunit_separator
-    |> add_padding
+    |> add_subunit_separator(decimal - 1)
+    |> add_padding(decimal - 1)
     |> split_units_and_subunits
     |> handle_cents(format, opts)
     |> set_symbol(format, opts)
@@ -274,17 +280,81 @@ defmodule CurrencyFormatter do
   @spec remove_non_numbers(String.t()) :: String.t()
   defp remove_non_numbers(string), do: String.replace(string, ~r/[^0-9-]/, "")
 
-  @spec add_subunit_separator(String.t()) :: String.t()
-  defp add_subunit_separator(string),
-    do: String.replace(string, ~r/^0*([0-9-]+)(\d{2})$/, "\\1,\\2")
+  @spec add_subunit_separator(String.t(), number) :: String.t()
+  defp add_subunit_separator(amount, decimal) do
+    String.replace(amount, ~r/^0*([0-9-]+)(\d{#{decimal}})$/, "\\1,\\2")
+  end
 
-  @spec add_padding(String.t()) :: String.t()
-  defp add_padding(""), do: "0,00"
-  defp add_padding("-" <> centified) when byte_size(centified) == 1, do: "-0,0" <> centified
-  defp add_padding(centified) when byte_size(centified) == 1, do: "0,0" <> centified
-  defp add_padding("-," <> centified) when byte_size(centified) == 2, do: "-0," <> centified
-  defp add_padding(centified) when byte_size(centified) == 2, do: "0," <> centified
-  defp add_padding(centified), do: centified
+  @spec add_padding(String.t(), number) :: String.t()
+  defp add_padding("", _decimal), do: "0,00"
+
+  defp add_padding("-" <> centified, decimal) when byte_size(centified) == 1 do
+    case decimal do
+      0 -> "-" <> centified
+      2 -> "-0,0" <> centified
+      3 -> "-0,00" <> centified
+      4 -> "-0,000" <> centified
+    end
+  end
+
+  defp add_padding(centified, decimal) when byte_size(centified) == 1 do
+    case decimal do
+      0 -> centified
+      2 -> "0,0" <> centified
+      3 -> "0,00" <> centified
+      4 -> "0,000" <> centified
+    end
+  end
+
+  defp add_padding("-," <> centified, decimal) when byte_size(centified) == 2 do
+    case decimal do
+      0 -> "-" <> centified
+      2 -> "-0," <> centified
+      3 -> "-0,0" <> centified
+      4 -> "-0,00" <> centified
+    end
+  end
+
+  defp add_padding(centified, decimal) when byte_size(centified) == 2 do
+    case decimal do
+      0 -> centified
+      2 -> "0," <> centified
+      3 -> "0,0" <> centified
+      4 -> "0,00" <> centified
+    end
+  end
+
+  defp add_padding("-" <> centified, decimal) when byte_size(centified) == 3 do
+    case decimal do
+      3 -> "-0," <> centified
+      4 -> "-0,0" <> centified
+      _ -> "-" <> centified
+    end
+  end
+
+  defp add_padding(centified, decimal) when byte_size(centified) == 3 do
+    case decimal do
+      3 -> "0," <> centified
+      4 -> "0,0" <> centified
+      _ -> centified
+    end
+  end
+
+  defp add_padding("-" <> centified, decimal) when byte_size(centified) == 4 do
+    case decimal do
+      4 -> "-0,0" <> centified
+      _ -> "-" <> centified
+    end
+  end
+
+  defp add_padding(centified, decimal) when byte_size(centified) == 4 do
+    case decimal do
+      4 -> "0," <> centified
+      _ -> centified
+    end
+  end
+
+  defp add_padding(centified, _decimal), do: centified
 
   @spec split_units_and_subunits(binary) :: [binary]
   defp split_units_and_subunits(string), do: String.split(string, ",", parts: 2)
@@ -327,6 +397,7 @@ defmodule CurrencyFormatter do
   @spec set_symbol(String.t(), map, Keyword.t()) :: String.t()
   defp set_symbol(number_string, %{"symbol_first" => true} = config, opts) do
     symbol = get_symbol(config, opts)
+
     if Keyword.get(opts, :html) do
       wrap_in_spans(symbol: symbol, amount: number_string)
     else
